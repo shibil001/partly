@@ -689,7 +689,7 @@ export default function RequestsPage() {
                   >
                     View Details
                   </button>
-                  {showMyRequests && currentUser && req.user_id === currentUser.id && req.status !== 'fulfilled' && (
+                  {showMyRequests && currentUser && req.user_id === currentUser.id && req.status !== 'fulfilled' && !(req.expires_at && new Date(req.expires_at) < new Date()) && (
                     <div className="flex gap-1 mt-1">
                       {(() => {
                         const lastBump = req.bumped_at ? new Date(req.bumped_at) : null
@@ -709,7 +709,7 @@ export default function RequestsPage() {
                       </button>
                     </div>
                   )}
-                  {showMyRequests && currentUser && req.user_id === currentUser.id && req.status !== 'fulfilled' && (
+                  {showMyRequests && currentUser && req.user_id === currentUser.id && req.status !== 'fulfilled' && !(req.expires_at && new Date(req.expires_at) < new Date()) && (
                     <button onClick={() => notifySellers(req.id)} disabled={notifyingId === req.id}
                       className="mt-1 w-full py-1 rounded-lg text-[10px] font-bold bg-orange-50 hover:bg-orange-500 hover:text-white text-orange-500 transition-colors disabled:opacity-50">
                       {notifyingId === req.id ? 'Notifying...' : notifyMessage?.id === req.id ? notifyMessage.msg : 'Notify Sellers'}
