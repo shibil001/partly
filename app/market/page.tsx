@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react"
 import { useRouter, useSearchParams } from "next/navigation"
+import { Suspense } from "react"
 import { Header } from "@/components/header"
 import { Plus, X, Search, SlidersHorizontal, MapPin, Fuel, Gauge, Calendar, Car } from "lucide-react"
 
@@ -51,7 +52,7 @@ interface Vehicle {
   users?: { full_name: string; username: string; avatar_url?: string }
 }
 
-export default function MarketPage() {
+function MarketPageInner() {
   const router = useRouter()
   const searchParams = useSearchParams()
   const [vehicles, setVehicles] = useState<Vehicle[]>([])
@@ -694,5 +695,13 @@ export default function MarketPage() {
         </div>
       )}
     </div>
+  )
+}
+
+export default function MarketPage() {
+  return (
+    <Suspense fallback={null}>
+      <MarketPageInner />
+    </Suspense>
   )
 }

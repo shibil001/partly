@@ -162,7 +162,6 @@ export default function AdminPage() {
   const [orders, setOrders] = useState<any[]>([])
   const [stats, setStats] = useState({ users: 0, sellers: 0, products: 0, orders: 0, revenue: 0 })
   const [pendingSellers, setPendingSellers] = useState<any[]>([])
-  const [resubmissions, setResubmissions] = useState<any[]>([])
   const [conversations, setConversations] = useState<any[]>([])
   const [activeConv, setActiveConv] = useState<any | null>(null)
   const [adminReply, setAdminReply] = useState('')
@@ -178,7 +177,7 @@ export default function AdminPage() {
   const [rejectReason, setRejectReason] = useState('')
   const [suspendModal, setSuspendModal] = useState<{ id: string; name: string; userId: string } | null>(null)
   const [suspendReason, setSuspendReason] = useState('')
-  const [convFilter, setConvFilter] = useState<'all'|'unread'|'buyers'|'new_sellers'|'used_sellers'|'resolved'>('all')
+  const [convFilter, setConvFilter] = useState<'all'|'unread'|'buyers'|'new_sellers'|'used_sellers'|'resolved'|'support'>('all')
 
   // Notification
   const [notifTitle, setNotifTitle] = useState('')
@@ -224,7 +223,6 @@ export default function AdminPage() {
         ])
         const [shopsData, msgsData] = await Promise.all([shopsRes.json(), msgsRes.json()])
         setPendingSellers(shopsData.shops || [])
-        setResubmissions((shopsData.shops || []).filter((s: any) => s.resubmitted_at))
         const convs = msgsData.conversations || []
         setUnreadCount(convs.filter((c: any) => c.status === 'open').length)
       } catch {}
@@ -301,11 +299,6 @@ export default function AdminPage() {
         setPendingSellers(data.shops || [])
       }
 
-      if (s === 'resubmissions') {
-        const res = await fetch(`${API}/api/admin/shops`, { headers })
-        const data = await res.json()
-        setResubmissions((data.shops || []).filter((s: any) => s.resubmitted_at))
-      }
 
       if (s === 'products' || s === 'featured') {
         const res = await fetch(`${API}/api/admin/products`, { headers })
