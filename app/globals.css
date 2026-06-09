@@ -1,0 +1,70 @@
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+
+@theme inline {
+  --color-background: #ffffff;
+  --color-foreground: #111827;
+  --color-card: #ffffff;
+  --color-card-foreground: #111827;
+  --color-primary: #2563eb;
+  --color-primary-foreground: #ffffff;
+  --color-secondary: #f3f4f6;
+  --color-secondary-foreground: #111827;
+  --color-muted: #f3f4f6;
+  --color-muted-foreground: #6b7280;
+  --color-accent: #f3f4f6;
+  --color-accent-foreground: #111827;
+  --color-destructive: #ef4444;
+  --color-destructive-foreground: #ffffff;
+  --color-border: #e5e7eb;
+  --color-input: #e5e7eb;
+  --color-ring: #2563eb;
+  --color-warning-foreground: #92400e;
+  --radius: 0.625rem;
+  --animate-in: fadeIn 0.2s ease-out;
+  --animate-out: fadeOut 0.15s ease-in;
+  --animate-accordion-down: accordionDown 0.2s ease-out;
+  --animate-accordion-up: accordionUp 0.2s ease-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes fadeOut {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+
+@keyframes accordionDown {
+  from { height: 0; }
+  to { height: var(--radix-accordion-content-height); }
+}
+
+@keyframes accordionUp {
+  from { height: var(--radix-accordion-content-height); }
+  to { height: 0; }
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+}
+/* Features editor placeholder */
+#features-editor:empty:before {
+  content: attr(data-placeholder);
+  color: #9ca3af;
+  pointer-events: none;
+}
+
+/* Features editor prose styles */
+#features-editor b, #features-editor strong { font-weight: 700; }
+#features-editor i, #features-editor em { font-style: italic; }
+#features-editor u { text-decoration: underline; }
+#features-editor s, #features-editor strike { text-decoration: line-through; }
+#features-editor ul { list-style-type: disc; padding-left: 1.5rem; margin: 0.5rem 0; }
+#features-editor ol { list-style-type: decimal; padding-left: 1.5rem; margin: 0.5rem 0; }
+#features-editor li { margin: 0.25rem 0; }
+#features-editor h2 { font-size: 1.1rem; font-weight: 700; margin: 0.5rem 0; }
