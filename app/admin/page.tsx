@@ -77,7 +77,7 @@ const mockPayouts: any[] = [
 
 ]
 
-const ADMIN_PASSWORD = "partly_admin_2026"
+const ADMIN_PASSWORD = "P@rt1y_4dm1n_#2026_X9k"
 
 const mockUsers = [
   { id: '1', full_name: 'Shibil Rahman', email: 'shibil@gmail.com', phone: '9846821643', role: 'buyer', created_at: '2026-01-15T10:00:00Z', is_banned: false },
