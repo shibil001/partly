@@ -166,7 +166,8 @@ export default function RequestsPage() {
 
   const fetchRequests = async () => {
     try {
-      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/requests`)
+      const url = showMyRequests && currentUser ? `${process.env.NEXT_PUBLIC_API_URL}/api/requests?show_all=true&user_id=${currentUser.id}` : `${process.env.NEXT_PUBLIC_API_URL}/api/requests`
+      const res = await fetch(url)
       const data = await res.json()
       const reqs = (data.requests || []).map((r: any) => ({
         ...r,

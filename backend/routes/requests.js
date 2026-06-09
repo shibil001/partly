@@ -14,7 +14,7 @@ router.get('/', async (req, res) => {
         .from('part_requests')
         .select('id, user_id, title, part_name, fitment_make, fitment_model, fitment_variant, fitment_year, engine, part_position, quantity, oem_number, condition_preference, location, pincode, delivery, budget_paise, notes, images, created_at, expires_at, is_paid, status, bumped_at, users(full_name, username, avatar_url)', { count: 'exact' })
         .is('deleted_at', null)
-        .or(`expires_at.is.null,expires_at.gt.${now}`)
+        .or(req.query.show_all === 'true' ? `user_id.eq.${req.query.user_id}` : `expires_at.is.null,expires_at.gt.${now}`)
         .order('bumped_at', { ascending: false, nullsFirst: false }).order('created_at', { ascending: false })
         .range(parseInt(req.query.offset || 0), parseInt(req.query.offset || 0) + parseInt(req.query.limit || 30) - 1),
       supabase
