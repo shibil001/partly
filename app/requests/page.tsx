@@ -101,6 +101,8 @@ export default function RequestsPage() {
     'Connect with sellers who have your part...',
   ]
 
+
+  useEffect(() => { fetchRequests() }, [showMyRequests])
   useEffect(() => {
     const interval = setInterval(() => {
       setPlaceholderIndex(i => (i + 1) % placeholders.length)
